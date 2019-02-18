@@ -1,0 +1,19 @@
+navbar:
+  title: "Cascade"
+  type: inverse
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: "Vignettes"
+      menu: 
+      - text: "Introduction to the Cascade package and application to the GSE39411 dataset"
+        href: https://cran.r-project.org/web/packages/Cascade/vignettes/Cascade.pdf
+      - text: "Additional application of the Cascade package to E-MTAB-1475 dataset"
+        href: https://cran.r-project.org/web/packages/Cascade/vignettes/E-MTAB-1475_re-analysis.pdf
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Changelog"
+      href: news/index.html
+  right:
+    - icon: fa-github
+      href: https://github.com/fbertran/Cascade

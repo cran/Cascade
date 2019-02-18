@@ -1,0 +1,3 @@
+1.0 - 1.4 Creation and review of the package 
+1.5 Package and especially its code was transformed to cope with CRAN requirements
+1.6 Package had to be splited and data shiped apart to CRAN in the CascadeData package

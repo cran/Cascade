@@ -1,0 +1,54 @@
+importFrom(abind,abind)
+importFrom(VGAM,rlaplace,rpareto,zeta)
+
+importFrom("grDevices", "col2rgb", "colorRamp", "dev.new", "grey",
+             "rainbow", "rgb")
+importFrom("graphics", "abline", "hist", "legend", "lines", "matplot",
+             "par", "rect", "text")
+importFrom("methods", "new")
+importFrom("stats", "aggregate", "cor", "lm", "loess", "model.matrix",
+             "quantile", "rbinom", "reshape", "rmultinom", "rnorm",
+             "runif", "var", "wilcox.test")
+importFrom("utils", "assignInNamespace", "sessionInfo")
+importFrom("cluster", "agnes")
+importFrom("animation", "ani.options", "saveHTML")
+  
+import(grid,
+       igraph, 
+       #lars, 
+       lattice, 
+       limma, 
+       magic,
+       nnls, 
+       splines, 
+       stats4, 
+       survival, 
+       tnet
+       )
+
+exportMethods(
+    "analyze_network",
+    "compare",
+    "cutoff",
+    "dim",
+    "evolution",
+    "geneNeighborhood",
+    "genePeakSelection",
+    "geneSelection",
+    "head",
+    "inference",
+    "plot",
+    "position",
+    "predict",
+    "print",
+    "summary",
+    "unionMicro",
+    "gene_expr_simulation"
+)
+exportClasses(
+    "micro_array",
+     "network",
+     "micropredict"
+)
+
+export("network_random","as.micro_array")
