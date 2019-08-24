@@ -21,7 +21,7 @@ Returns a micro_array object which is the union of the elements of M1.
 }}
 
 \examples{
-data(simul)
+data(M)
 #Create another microarray object with 100 genes
 Mbis<-M
 #Rename the 100 genes

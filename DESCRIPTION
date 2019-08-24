@@ -2,9 +2,10 @@ Package: Cascade
 Type: Package
 Title: Selection, Reverse-Engineering and Prediction in Cascade
         Networks
-Version: 1.7
-Date: 2019-02-09
-Depends: R (>= 2.10)
+Version: 1.8
+Date: 2019-08-24
+Depends: R (>= 3.5.0)
+biocViews:
 Imports: abind, animation, cluster, grid, igraph, lars, lattice, limma,
         magic, methods, nnls, splines, stats4, survival, tnet, VGAM
 Suggests: R.rsp, CascadeData, knitr
@@ -30,6 +31,6 @@ URL: http://www-irma.u-strasbg.fr/~fbertran/,
         https://github.com/fbertran/Cascade
 BugReports: https://github.com/fbertran/Cascade/issues
 NeedsCompilation: no
-Packaged: 2019-02-09 02:24:24 UTC; fbertran
+Packaged: 2019-08-23 23:47:33 UTC; fbertran
 Repository: CRAN
-Date/Publication: 2019-02-18 14:50:52 UTC
+Date/Publication: 2019-08-24 04:20:06 UTC

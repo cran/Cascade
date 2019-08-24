@@ -40,7 +40,7 @@ Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
 
 
 \examples{
-data(simul)
+data(Net)
 set.seed(1)
 
 #We simulate gene expression according to the network Net

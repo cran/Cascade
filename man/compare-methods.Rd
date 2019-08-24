@@ -41,7 +41,8 @@ Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F., Meyer, N.
 Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
 }
 \examples{
-data(simul)
+data(Net)
+data(Net_inf)
 
 #Comparing true and inferred networks
 F_score=NULL

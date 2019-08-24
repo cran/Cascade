@@ -1,3 +1,7 @@
+# Cascade 1.8
+
+* Fix discrepancy between datalist and datasets as requested by CRAN.
+
 # Cascade 1.7
 
 * Help pages were completed and examples added for every function. It required new datasets that were added to the package.

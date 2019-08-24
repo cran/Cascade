@@ -1,8 +1,16 @@
-setClass(Class = "micro_array",
-representation(microarray="matrix",name="vector",group=c("vector",NULL),start_time=c("vector",NULL),time=c("vector",NULL),subject="numeric"),
-prototype = prototype(group = 0,start_time=0),
-validity=function(object){
-
+setClass(
+  Class = "micro_array",
+  representation(
+    microarray = "matrix",
+    name = "vector",
+    group = c("vector", NULL),
+    start_time = c("vector", NULL),
+    time = c("vector", NULL),
+    subject = "numeric"
+  ),
+  prototype = prototype(group = 0, start_time = 0),
+  validity = function(object) {
+    
 	if(dim(object@microarray)[2] != length(object@time)*object@subject){
 
 				stop("[Error: ]Number of colomns must be equal to the number of time points * the number of subject")

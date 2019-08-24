@@ -46,8 +46,10 @@ Considering the class of the argument which is passed to plot, the graphical out
 }
 }
 \examples{
-data(simul)
+data(Net)
 plot(Net)
+
+data(M)
 plot(M)
 
 data(Selection)

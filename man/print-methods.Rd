@@ -10,8 +10,10 @@
 }
 
 \examples{
-data(simul)
+data(Net)
 print(Net)
+
+data(M)
 print(M)
 }
 

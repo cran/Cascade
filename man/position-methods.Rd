@@ -15,7 +15,7 @@ Returns a matrix with the position of the node. This matrix can then be used as 
 }
 }}
 \examples{
-data(simul)
+data(Net)
 position(Net)
 }
 \keyword{methods}

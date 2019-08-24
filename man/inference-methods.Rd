@@ -40,7 +40,7 @@ Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
 \examples{
 \donttest{
 #With simulated data
-data(simul)
+data(M)
 infM <- inference(M)
 str(infM)
 

@@ -9,7 +9,7 @@
 }
 
 \examples{
-data(simul)
+data(M)
 summary(M)
 }
 \keyword{methods}
