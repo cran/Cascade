@@ -1,15 +1,33 @@
-setClass(Class = "network",
-         representation(network="matrix",name="vector",F="array",convF="matrix",convO="vector",time_pt="vector")
-)
-
-
-
-setMethod("print","network",function(x,...){
-  cat(paste("This is a S4 class with : \n - (@network) a matrix of dimension ",dim(x@network)[1],"*",dim(x@network)[2]," .... [the network] \n - (@name) a vector of length ",length(x@name)," .... [gene names] \n","- (@F) a array of dimension ",dim(x@F)[1],"*",dim(x@F)[2],"*",dim(x@F)[3]," .... [F matrices] \n","- (@convF) a matrix of dimension ",dim(x@convF)[1],"*",dim(x@convF)[2]," .... [convergence (L1 norm) of array F] \n","- (@convO)a vector of length ",length(x@convO)," .... [convergence (L1 norm) of matrix Omega]\n","- (@time_pt) an vector of length",length(x@time_pt),"  .... [time points]")) 
-})
-
-
-
+#' Analysing the network
+#' 
+#' Calculates some indicators for each node in the network.
+#' 
+#' 
+#' @aliases analyze_network analyze_network-methods
+#' analyze_network,network-method
+#' @param Omega a network object
+#' @param nv the level of cutoff at which the analysis should be done
+#' @param label_v (optionnal) the name of the genes
+#' @return A matrix containing, for each node, its betweenness,its degree, its
+#' output, its closeness.
+#' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
+#' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
+#' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
+#' simulate the diffusion of a signal through a temporal gene network.
+#' \emph{Bioinformatics}, btt705.
+#' 
+#' Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F.,
+#' Meyer, N., ... & Bahram, S. (2013). Reverse-engineering the genetic
+#' circuitry of a cancer cell with predicted intervention in chronic
+#' lymphocytic leukemia. \emph{Proceedings of the National Academy of
+#' Sciences}, 110(2), 459-464.
+#' @keywords methods
+#' @examples
+#' 
+#' 	data(network)
+#' 	analyze_network(network,nv=0)
+#' 
+#' @exportMethod analyze_network
 setMethod("analyze_network","network",function(Omega,nv,label_v=NULL){
   require(tnet)
   if(is.null(label_v)){label_v<-1:dim(Omega@network)[1]}
@@ -30,7 +48,54 @@ setMethod("analyze_network","network",function(Omega,nv,label_v=NULL){
 }
 )
 
+#' @rdname print-methods
+setMethod("print","network",function(x,...){
+  cat(paste("This is a S4 class with : \n - (@network) a matrix of dimension ",dim(x@network)[1],"*",dim(x@network)[2]," .... [the network] \n - (@name) a vector of length ",length(x@name)," .... [gene names] \n","- (@F) a array of dimension ",dim(x@F)[1],"*",dim(x@F)[2],"*",dim(x@F)[3]," .... [F matrices] \n","- (@convF) a matrix of dimension ",dim(x@convF)[1],"*",dim(x@convF)[2]," .... [convergence (L1 norm) of array F] \n","- (@convO)a vector of length ",length(x@convO)," .... [convergence (L1 norm) of matrix Omega]\n","- (@time_pt) an vector of length",length(x@time_pt),"  .... [time points]")) 
+})
 
+
+#' See the evolution of the network with change of cutoff
+#' 
+#' See the evolution of the network with change of cutoff.  This function may
+#' be usefull to see if the global topology is changed while increasing the
+#' cutoff.
+#' 
+#' @aliases evolution evolution-methods evolution,network-method
+#' @param net a network object
+#' @param list_nv a vector of cutoff at which the network should be shown
+#' @param gr a vector giving the group of each gene 
+#' @param color.vertex a vector giving the color of each node
+#' @param fix logical, should the position of the node in the network be calculated once at the beginning ? Defaults to TRUE.
+#' @param gif logical, TRUE
+#' @param taille vector giving the size of the plot. Default to c(2000,1000)
+#' @param label_v (optionnal) the name of the genes
+#' @param legend.position (optionnal) the position of the legend, defaults to "topleft"
+#' @param frame.color (optionnal) the color of the frame, defaults to "black"
+#' @param label.hub (optionnal) boolean, defaults to FALSE
+#' 
+#' @return A HTML page with the evolution of the network.
+#' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
+#' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
+#' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
+#' simulate the diffusion of a signal through a temporal gene network.
+#' \emph{Bioinformatics}, btt705.
+#' 
+#' Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F.,
+#' Meyer, N., ... & Bahram, S. (2013). Reverse-engineering the genetic
+#' circuitry of a cancer cell with predicted intervention in chronic
+#' lymphocytic leukemia. \emph{Proceedings of the National Academy of
+#' Sciences}, 110(2), 459-464.
+#' @keywords methods
+#' @examples
+#' 
+#' \donttest{
+#' 	data(network)
+#' 	sequence<-seq(0,0.2,length.out=20)
+#' 	#setwd("inst/animation")
+#' 	#evolution(network,sequence)
+#' }
+#' 
+#' @exportMethod evolution
 setMethod("evolution","network",function(net
                                          ,list_nv
                                          ,gr=NULL
@@ -117,6 +182,28 @@ setMethod("evolution","network",function(net
 }
 )
 
+#' Returns the position of edges in the network
+#' 
+#' Returns the position of edges in the network
+#' 
+#' 
+#' @name position-methods
+#' @aliases position position-methods position,network-method
+#' @docType methods
+#' @section Methods: \describe{
+#' 
+#' \item{list("signature(net = \"network\")")}{ Returns a matrix with the
+#' position of the node. This matrix can then be used as an argument in the
+#' plot function. } }
+#' @param net a network object
+#' @param nv the level of cutoff at which the analysis should be done
+#' @keywords methods
+#' @examples
+#' 
+#' data(Net)
+#' position(Net)
+#' 
+#' @exportMethod position
 setMethod("position","network",function(net,nv=0){
   require(igraph)
   O<-net@network
@@ -148,6 +235,7 @@ setMethod("position","network",function(net,nv=0){
 #######################################
 #######################################
 
+#' @rdname plot-methods
 setMethod("plot"
           ,"network"
           ,function(x
@@ -561,6 +649,52 @@ setMethod("plot"
           }
 )
 
+
+#' Find the neighborhood of a set of nodes.
+#' 
+#' Find the neighborhood of a set of nodes.
+#' 
+#' 
+#' @aliases geneNeighborhood geneNeighborhood-methods
+#' geneNeighborhood,network-method
+#' @param net a network object
+#' @param targets a vector containing the set of nodes
+#' @param nv the level of cutoff. Defaut to 0.
+#' @param order of the neighborhood. Defaut to `length(net@time_pt)-1`.
+#' @param label_v vector defining the vertex labels.
+#' @param ini using the ``position'' function, you can
+#' fix the position of the nodes.
+#' @param frame.color color of the frames.
+#' @param label.hub logical ; if TRUE only the hubs are labeled.
+#' @param graph plot graph of the network. Defaults to `TRUE`.
+#' @param names return names of the neighbors. Defaults to `FALSE`.
+#' 
+#' @return The neighborhood of the targeted genes.
+#' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
+#' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
+#' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
+#' simulate the diffusion of a signal through a temporal gene network.
+#' \emph{Bioinformatics}, btt705.
+#' 
+#' Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F.,
+#' Meyer, N., ... & Bahram, S. (2013). Reverse-engineering the genetic
+#' circuitry of a cancer cell with predicted intervention in chronic
+#' lymphocytic leukemia. \emph{Proceedings of the National Academy of
+#' Sciences}, 110(2), 459-464.
+#' @keywords methods
+#' @examples
+#' 
+#' data(Selection)
+#' data(network)
+#' #A nv value can chosen using the cutoff function
+#' nv=.11 
+#' EGR1<-which(match(Selection@name,"EGR1")==1)
+#' P<-position(network,nv=nv)
+#' 
+#' geneNeighborhood(network,targets=EGR1,nv=nv,ini=P,
+#' label_v=network@name)
+#' 
+#' @exportMethod geneNeighborhood
 setMethod("geneNeighborhood","network"
           ,function(net
                     ,targets
@@ -573,7 +707,7 @@ setMethod("geneNeighborhood","network"
                     #,edge.arrow.size=0.7
                     #,edge.thickness=1
                     ,graph=TRUE
-                    ,names=F
+                    ,names=FALSE
           ){
             require(igraph)
             O<-net@network
@@ -641,6 +775,45 @@ setMethod("geneNeighborhood","network"
           }
 )
 
+
+#' Choose the best cutoff
+#' 
+#' Allows estimating the best cutoff, in function of the scale-freeness of the
+#' network.  For a sequence of cutoff, the corresponding p-value is then
+#' calculated.
+#' 
+#' 
+#' @aliases cutoff cutoff-methods cutoff,network-method
+#' @param Omega a network object
+#' @param sequence (optional) a vector corresponding to the sequence of cutoffs 
+#' that will be tested.
+#' @param x_min (optional) an integer ; only values over x_min are further 
+#' retained for performing the test.
+#' 
+#' @return A list containing two objects : \item{p.value}{the p values
+#' corresponding to the sequence of cutoff} \item{p.value.inter}{the smoothed p
+#' value vector, using the loess function}
+#' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
+#' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
+#' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
+#' simulate the diffusion of a signal through a temporal gene network.
+#' \emph{Bioinformatics}, btt705.
+#' 
+#' Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F.,
+#' Meyer, N., ... & Bahram, S. (2013). Reverse-engineering the genetic
+#' circuitry of a cancer cell with predicted intervention in chronic
+#' lymphocytic leukemia. \emph{Proceedings of the National Academy of
+#' Sciences}, 110(2), 459-464.
+#' @keywords methods
+#' @examples
+#' 
+#' \donttest{
+#' 	data(network)
+#' 	cutoff(network)
+#' 	#See vignette for more details
+#' }
+#' 
+#' @exportMethod cutoff
 setMethod("cutoff","network",function(Omega,sequence=NULL,x_min=0){
   
   plfit<-function(x=VGAM::rpareto(1000,10,2.5)
@@ -1147,6 +1320,53 @@ print(f)
 )
 
 
+#' Some basic criteria of comparison between actual and inferred network.
+#' 
+#' Allows comparison between actual and inferred network.
+#' 
+#' 
+#' @name compare-methods
+#' @aliases compare-methods compare compare,network,network,numeric-method
+#' @docType methods
+#' @return A vector containing : sensibility, predictive positive value, and
+#' the F-score
+#' @section Methods: \describe{
+#' \item{list("signature(Net = \"network\", Net_inf = \"network\", nv =
+#' \"numeric\")")}{}
+#' }
+#' @param Net A network object containing the
+#' actual network.
+#' @param Net_inf A network object containing the inferred
+#' network.
+#' @param nv A number that indicates at which level of cutoff the
+#' comparison should be done.
+#' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
+#' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
+#' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
+#' simulate the diffusion of a signal through a temporal gene network.
+#' \emph{Bioinformatics}, btt705.
+#' 
+#' Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F.,
+#' Meyer, N., ... & Bahram, S. (2013). Reverse-engineering the genetic
+#' circuitry of a cancer cell with predicted intervention in chronic
+#' lymphocytic leukemia. \emph{Proceedings of the National Academy of
+#' Sciences}, 110(2), 459-464.
+#' @examples
+#' 
+#' data(Net)
+#' data(Net_inf)
+#' 
+#' #Comparing true and inferred networks
+#' F_score=NULL
+#' 
+#' #Here are the cutoff level tested
+#' test.seq<-seq(0,max(abs(Net_inf@network*0.9)),length.out=200)
+#' for(u in test.seq){
+#' 	F_score<-rbind(F_score,Cascade::compare(Net,Net_inf,u))
+#' }
+#' matplot(test.seq,F_score,type="l",ylab="criterion value",xlab="cutoff level",lwd=2)
+#' 
+#' @exportMethod compare
 setMethod("compare",c("network","network","numeric"),function(Net,
                                                     Net_inf,
                                                     nv=1){

@@ -2,8 +2,8 @@ Package: Cascade
 Type: Package
 Title: Selection, Reverse-Engineering and Prediction in Cascade
         Networks
-Version: 1.8
-Date: 2019-08-24
+Version: 2.0
+Date: 2021-03-18
 Depends: R (>= 3.5.0)
 biocViews:
 Imports: abind, animation, cluster, grid, igraph, lars, lattice, limma,
@@ -22,15 +22,15 @@ Maintainer: Frederic Bertrand <frederic.bertrand@math.unistra.fr>
 Description: A modeling tool allowing gene selection, reverse engineering, and prediction in cascade networks. Jung, N., Bertrand, F., Bahram, S., Vallat, L., and Maumy-Bertrand, M. (2014) <doi:10.1093/bioinformatics/btt705>.
 License: GPL (>= 2)
 Encoding: UTF-8
-Collate: global.R micro_array.R network.R micro_array-network.R
-        micropredict.R
+Collate: Cascade-package.R global.R micro_array.R network.R
+        micro_array-network.R micropredict.R datasets.R
 Classification/MSC: 62J05, 62J07, 62J99, 92C42
 VignetteBuilder: R.rsp
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 URL: http://www-irma.u-strasbg.fr/~fbertran/,
         https://github.com/fbertran/Cascade
 BugReports: https://github.com/fbertran/Cascade/issues
 NeedsCompilation: no
-Packaged: 2019-08-23 23:47:33 UTC; fbertran
+Packaged: 2021-03-18 22:24:36 UTC; fbertran
 Repository: CRAN
-Date/Publication: 2019-08-24 04:20:06 UTC
+Date/Publication: 2021-03-19 05:20:17 UTC

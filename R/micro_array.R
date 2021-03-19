@@ -1,47 +1,26 @@
-setClass(
-  Class = "micro_array",
-  representation(
-    microarray = "matrix",
-    name = "vector",
-    group = c("vector", NULL),
-    start_time = c("vector", NULL),
-    time = c("vector", NULL),
-    subject = "numeric"
-  ),
-  prototype = prototype(group = 0, start_time = 0),
-  validity = function(object) {
-    
-	if(dim(object@microarray)[2] != length(object@time)*object@subject){
-
-				stop("[Error: ]Number of colomns must be equal to the number of time points * the number of subject")
-		}
-	if(dim(object@microarray)[1] != length(object@name)&&length(object@name)!=0){
-
-				stop("[Error: ] Length of the vector of names must equal to the number of genes")
-		}
-
-	if(dim(object@microarray)[1] != length(object@group)&&length(object@group)!=1){
-
-				print(object@group)
-				stop("[Error: ] Length of the vector of group must equal to the number of genes or null")
-		}
-	
-	if(dim(object@microarray)[1] != length(object@start_time)&&length(object@start_time)!=1){
-
-
-				stop("[Error: ] Length of the vector of starting time must equal to the number of genes or null")
-		}
-		
-
-	if(object@subject<1){
-
-				stop("[Error: ] There must be at least one subject")
-		}	
-
-	}
-
-)
-
+#' Overview of a micro_array object
+#' 
+#' Overview of a micro_array object.
+#' 
+#' 
+#' @aliases methods head-methods head,ANY-method head,micro_array-method
+#' @section Methods: \describe{
+#' 
+#' \item{list("signature(x = \"ANY\")")}{ Gives an overview. }
+#' 
+#' \item{list("signature(x = \"micro_array\")")}{ Gives an overview. } }
+#' 
+#' @param x an object of class `micro-array`
+#' @param ... additional parameters
+#' @keywords methods
+#' @examples
+#' 
+#'  if(require(CascadeData)){
+#' 	data(micro_US)
+#' 	micro_US<-as.micro_array(micro_US,time=c(60,90,210,390),subject=6)
+#' 	head(micro_US)
+#' 	}
+#' @exportMethod head
 setMethod("head","micro_array",function(x,...)
 {
 	cat("The matrix :")
@@ -80,16 +59,51 @@ setMethod("head","micro_array",function(x,...)
 )
 
 
+#' Methods for Function \code{print}
+#' 
+#' Methods for function \code{print}
+#' 
+#' 
+#' @name print-methods
+#' @aliases print-methods print,ANY-method print,micro_array-method
+#' print,network-method
+#' @param x an object of class micro-array or network
+#' @param ... additional parameters
+#' @docType methods
+#' @keywords methods
+#' @examples
+#' 
+#' data(Net)
+#' print(Net)
+#' 
+#' data(M)
+#' print(M)
+#' 
+#' @exportMethod print
 setMethod("print","micro_array",function(x,...)
 {
 cat(paste("This is a micro_array S4 class. It contains : \n - (@microarray) a matrix of dimension ",dim(x@microarray)[1],"*",dim(x@microarray)[2],"\n          .... [gene expressions] \n - (@name) a vector of length ",length(x@name)," .... [gene names] \n","- (@group) a vector of length ",length(x@group)," .... [groups for genes] \n","- (@start_time) a vector of length ",length(x@start_time),"\n          .... [first differential expression for genes] \n","- (@time)a vector of length ",length(x@time)," .... [time points]\n","- (@subject) an integer  .... [number of subject]")) 	
 })
 
 
-
-
-
-
+#' Methods for Function \code{summary}
+#' 
+#' Methods for function \code{summary}
+#' 
+#' 
+#' @name summary-methods
+#' @aliases summary-methods summary,ANY-method summary,micro_array-method
+#' @docType methods
+#' @keywords methods
+#' @param object an object of class micro-array
+#' @param nb.graph (optionnal) choose the graph to plot. Displays all graphs by default.
+#' @param ... additional parameters.
+#' @examples
+#' 
+#' data(M)
+#' summary(M)
+#' 
+#' @exportMethod summary
 setMethod("summary","micro_array",function(object,nb.graph=NULL,...)
 {
 	require(cluster)
@@ -138,10 +152,108 @@ par.settings = list(layout.widths = list(axis.key.padding = 0,
 	}}
 	)
 
+#' Dimension of the data
+#' 
+#' Dimension of the data
+#' 
+#' 
+#' @name dim
+#' @aliases dim dim-methods dim,micro_array-method
+#' @docType methods
+#' @section Methods: \describe{
+#' 
+#' \item{list("signature(x = \"micro_array\")")}{ Gives the dimension of the
+#' matrix of measurements. } }
+#' 
+#' @param x an object of class "micro-array
+#' @keywords methods
+#' @examples
+#' 
+#'  if(require(CascadeData)){
+#' 	data(micro_US)
+#' 	micro_US<-as.micro_array(micro_US,time=c(60,90,210,390),subject=6)
+#' 	dim(micro_US)
+#' 	}
+#' 
+#' @exportMethod dim
 setMethod("dim","micro_array",function(x)
 {
 	return(dim(x@microarray))
 })
+
+
+#' Plot
+#' 
+#' Considering the class of the argument which is passed to plot, the graphical
+#' output differs.
+#' 
+#' 
+#' @name plot-methods
+#' @aliases plot-methods plot,ANY,ANY-method plot,micro_array,ANY-method
+#' plot,network,ANY-method plot,micropredict,ANY-method
+#' @docType methods
+#' @section Methods: \describe{
+#' 
+#' \item{list("signature(x = \"micro_array\", y = \"ANY\",...)")}{ \describe{
+#' \item{x}{a micro\_array object} \item{list_nv}{a vector of cutoff at which
+#' the network should be shown} } } \item{list("signature(x = \"network\", y =
+#' \"ANY\",...)")}{ \describe{ \item{x}{a network object}
+#' \item{list()}{Optionnal arguments: \describe{ \item{gr}{a vector giving the
+#' group of each gene} \item{choice}{what graphic should be plotted: either "F"
+#' (for a representation of the matrices F) or "network".} \item{nv}{the level
+#' of cutoff. Defaut to 0.} \item{ini}{using the ``position'' function, you can
+#' fix the position of the nodes} \item{color.vertex}{a vector defining the
+#' color of the vertex} \item{ani}{animated plot?} \item{size}{vector giving the size of the plot. Default
+#' to c(2000,1000)} \item{video}{if ani is TRUE and video is TRUE, the
+#' animation result is a GIF video} \item{label_v}{vector defining the vertex
+#' labels} \item{legend.position}{position of the legend}
+#' \item{frame.color}{color of the frames} \item{label.hub}{logical ; if TRUE
+#' only the hubs are labeled} \item{edge.arrow.size}{size of the arrows ;
+#' default to 0.7} \item{edge.thickness}{edge thickness ; default to 1.} } }}}
+#' 
+#' \item{list("signature(x = \"micropredict\", y = \"ANY\",...)")}{ \describe{
+#' \item{x}{a micropredict object} \item{list()}{Optionnal arguments: see plot
+#' for network} }} }
+#' 
+#' @param x a micro\_array object, a network object or a micropredict object
+#' @param y optional and not used if x is an appropriate structure
+#' @param gr a vector giving the group of each gene 
+#' @param choice what graphic should be plotted: either "F"
+#' (for a representation of the matrices F) or "network".
+#' @param nv the level of cutoff. Defaut to `0`.
+#' @param ini using the ``position'' function, you can
+#' fix the position of the nodes.
+#' @param color.vertex a vector defining the color of the vertex.
+#' @param ani animated plot?
+#' @param taille vector giving the size of the plot. Default to `c(2000,1000)`.
+#' @param video if ani is TRUE and video is TRUE, the result of the animation is saved as an animated GIF. 
+#' @param label_v vector defining the vertex labels.
+#' @param legend.position position of the legend.
+#' @param frame.color color of the frames.
+#' @param label.hub logical ; if TRUE only the hubs are labeled.
+#' @param edge.arrow.size size of the arrows ; default to 0.7.
+#' @param edge.thickness edge thickness ; default to 1.
+#' @param weight.node nodes weighting. Defaults to `NULL`.
+#' @param horiz landscape? Defaults to `TRUE`.
+#' @param time sets the time for plot of the prediction. Defaults to `NULL`
+#' @param ... additional parameters
+#' 
+#' @keywords methods
+#' @examples
+#' 
+#' data(Net)
+#' plot(Net)
+#' 
+#' data(M)
+#' plot(M)
+#' 
+#' data(Selection)
+#' data(network)
+#' nv<-0.11
+#' plot(network,choice="network",gr=Selection@group,nv=nv,label_v=Selection@name,
+#' edge.arrow.size=0.9,edge.thickness=1.5)
+#' 
+#' @exportMethod plot
 setMethod("plot","micro_array",function(x,y,...)
 {
 		
@@ -188,11 +300,159 @@ else{
 	}
 }
 )
+
  
- 
- setMethod(f="geneSelection", 
-	signature=c("micro_array","micro_array","numeric"),
-	definition=function(x,y,tot.number,data_log=TRUE,wanted.patterns=NULL,forbidden.patterns=NULL,peak=NULL,alpha=0.05,Design=NULL,lfc=0){
+
+#' Methods for selecting genes
+#' 
+#' Selection of differentially expressed genes.
+#' 
+#' @name geneSelection
+#' @aliases genePeakSelection geneSelection genePeakSelection-methods
+#' geneSelection-methods geneSelection,list,list,numeric-method
+#' geneSelection,micro_array,micro_array,numeric-method
+#' genePeakSelection,micro_array,numeric-method
+#' @param x either a micro_array object or a list of micro_array objects. In
+#' the first case, the micro_array object represents the stimulated
+#' measurements. In the second case, the control unstimulated data (if present)
+#' should be the first element of the list.
+#' @param y either a micro_array object or a list of strings. In the first
+#' case, the micro_array object represents the stimulated measurements. In the
+#' second case, the list is the way to specify the contrast: \describe{
+#' \item{First element:}{ condition, condition&time or pattern. The condition
+#' specification is used when the overall is to compare two conditions.  The
+#' condition&time specification is used when comparing two conditions at two
+#' precise time points. The pattern specification allows to decide which time
+#' point should be differentially expressed.} \item{Second element:}{a vector
+#' of length 2. The two conditions which should be compared. If a condition is
+#' used as control, it should be the first element of the vector. However, if
+#' this control is not measured throught time, the option cont=TRUE should be
+#' used.} \item{Third element:}{depends on the first element.  It is no needed
+#' if condition has been specified.  If condition&time has been specified, then
+#' this is a vector containing the time point at which the comparison should be
+#' done. If pattern has been specified, then this is a vector of 0 and 1 of
+#' length T, where T is the number of time points. The time points with desired
+#' differential expression are provided with 1.  }}
+#' @param tot.number an integer. The number of selected genes. If tot.number <0
+#' all differentially genes are selected. If tot.number > 1, tot.number is the
+#' maximum of diffenrtially genes that will be selected.  If 0<tot.number<1,
+#' tot.number represents the proportion of diffenrentially genes that are
+#' selected.
+#' @param peak interger. At which time points measurements should the genes be
+#' selected [optionnal for geneSelection].
+#' @param data_log logical (default to TRUE); should data be logged ?
+#' @param wanted.patterns a matrix with wanted patterns [only for geneSelection].
+#' @param forbidden.patterns a matrix with forbidden patterns [only for geneSelection].
+#' @param durPeak vector of size 2 (default to c(1,1)) ; the first elements gives the length of the peak at
+#' the left, the second at the right. [only for genePeakSelection]
+#' @param abs_val logical (default to TRUE) ; should genes be selected on the
+#' basis of their absolute value expression ? [only for genePeakSelection]
+#' @param alpha_diff float; the risk level
+#' @param alpha float; the risk level. Default to `alpha=0.05`
+#' @param Design the design matrix of the experiment. Defaults to `NULL`.
+#' @param lfc log fold change value used in limma's `topTable`. Defaults to 0.
+#' @param cont use contrasts. Defaults to `FALSE`. 
+#' @param f.asso function used to assess the association between the genes. 
+#' Tje default value `NULL` implies the use of the usual `mean` function. 
+#' 
+#' @return A micro_array object.
+#' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
+#' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
+#' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
+#' simulate the diffusion of a signal through a temporal gene network.
+#' \emph{Bioinformatics}, btt705.
+#' 
+#' Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F.,
+#' Meyer, N., ... & Bahram, S. (2013). Reverse-engineering the genetic
+#' circuitry of a cancer cell with predicted intervention in chronic
+#' lymphocytic leukemia. \emph{Proceedings of the National Academy of
+#' Sciences}, 110(2), 459-464.
+#' @keywords methods
+#' @examples
+#' 
+#' \donttest{
+#'  if(require(CascadeData)){
+#' 	data(micro_US)
+#' 	micro_US<-as.micro_array(micro_US,time=c(60,90,210,390),subject=6)
+#' 	data(micro_S)
+#' 	micro_S<-as.micro_array(micro_S,time=c(60,90,210,390),subject=6)
+#' 
+#'   #Basically, to find the 50 more significant expressed genes you will use:
+#'   Selection_1<-geneSelection(x=micro_S,y=micro_US,
+#'   tot.number=50,data_log=TRUE)
+#'   summary(Selection_1)
+#'   
+#'   #If we want to select genes that are differentially 
+#'   #at time t60 or t90 :
+#'   Selection_2<-geneSelection(x=micro_S,y=micro_US,tot.number=30,
+#'   wanted.patterns=
+#'   rbind(c(0,1,0,0),c(1,0,0,0),c(1,1,0,0)))
+#'   summary(Selection_2)
+#' 
+#'   #To select genes that have a differential maximum of expression at a specific time point.
+#'   
+#'   Selection_3<-genePeakSelection(x=micro_S,y=micro_US,peak=1,
+#'   abs_val=FALSE,alpha_diff=0.01)
+#'   summary(Selection_3)
+#'   }
+#' 
+#'  if(require(CascadeData)){
+#' data(micro_US)
+#' micro_US<-as.micro_array(micro_US,time=c(60,90,210,390),subject=6)
+#' data(micro_S)
+#' micro_S<-as.micro_array(micro_S,time=c(60,90,210,390),subject=6)
+#' #Genes with differential expression at t1
+#' Selection1<-geneSelection(x=micro_S,y=micro_US,20,wanted.patterns= rbind(c(1,0,0,0)))
+#' #Genes with differential expression at t2
+#' Selection2<-geneSelection(x=micro_S,y=micro_US,20,wanted.patterns= rbind(c(0,1,0,0)))
+#' #Genes with differential expression at t3
+#' Selection3<-geneSelection(x=micro_S,y=micro_US,20,wanted.patterns= rbind(c(0,0,1,0)))
+#' #Genes with differential expression at t4
+#' Selection4<-geneSelection(x=micro_S,y=micro_US,20,wanted.patterns= rbind(c(0,0,0,1)))
+#' #Genes with global differential expression 
+#' Selection5<-geneSelection(x=micro_S,y=micro_US,20)
+#' 
+#' #We then merge these selections:
+#' Selection<-unionMicro(list(Selection1,Selection2,Selection3,Selection4,Selection5))
+#' print(Selection)
+#' 
+#' #Prints the correlation graphics Figure 4:
+#' summary(Selection,3)
+#' 
+#' ##Uncomment this code to retrieve geneids.
+#' #library(org.Hs.eg.db)
+#' #
+#' #ff<-function(x){substr(x, 1, nchar(x)-3)}
+#' #ff<-Vectorize(ff)
+#' #
+#' ##Here is the function to transform the probeset names to gene ID.
+#' #
+#' #library("hgu133plus2.db")
+#' #
+#' #probe_to_id<-function(n){  
+#' #x <- hgu133plus2SYMBOL
+#' #mp<-mappedkeys(x)
+#' #xx <- unlist(as.list(x[mp]))
+#' #genes_all = xx[(n)]
+#' #genes_all[is.na(genes_all)]<-"unknown"
+#' #return(genes_all)
+#' #}
+#' #Selection@name<-probe_to_id(Selection@name)
+#' }
+#' }
+#' 
+#' @exportMethod geneSelection
+setMethod(f="geneSelection", signature=c("micro_array","micro_array","numeric"),
+	definition=function(x,
+	                    y,
+	                    tot.number,
+	                    data_log=TRUE,
+	                    wanted.patterns=NULL,
+	                    forbidden.patterns=NULL,
+	                    peak=NULL,
+	                    alpha=0.05,
+	                    Design=NULL,
+	                    lfc=0){
    
 	  if(!is.null(sessionInfo()$otherPkgs$limma$Version)){
 	  BBB<-strsplit(sessionInfo()$otherPkgs$limma$Version,"[.]")
@@ -419,10 +679,17 @@ sortie
 
 )
 
-
+#' @rdname geneSelection
 setMethod(f="geneSelection", 
 	signature=c("list","list","numeric"),
-	definition=function(x,y,tot.number,data_log=TRUE,alpha=0.05,cont=FALSE,lfc=0,f.asso=NULL){
+	definition=function(x,
+	                    y,
+	                    tot.number,
+	                    data_log=TRUE,
+	                    alpha=0.05,
+	                    cont=FALSE,
+	                    lfc=0,
+	                    f.asso=NULL){
   
   
 	  if(!is.null(sessionInfo()$otherPkgs$limma$Version)){
@@ -685,11 +952,11 @@ p.val.all<-p.val.all[1:nb.ret,]
 )
 
 
-
+#' @rdname geneSelection
+#' @exportMethod genePeakSelection
 setMethod(f="genePeakSelection", 
 	signature=c("micro_array","numeric"),
 	definition=function(x,peak,y=NULL,data_log=TRUE,durPeak=c(1,1),abs_val=TRUE,alpha_diff=0.05){
-			
 			  M1<-x
 			  M2<-y
 			Select<-geneSelection(M1,tot.number=-1,M2,data_log=data_log,peak=peak)
@@ -815,12 +1082,41 @@ setMethod(f="genePeakSelection",
 		)
 		
 
+#' Makes the union between two micro_array objects.
+#' 
+#' Makes the union between two micro_array objects.
+#' 
+#' 
+#' @name unionMicro-methods
+#' @aliases unionMicro unionMicro-methods
+#' unionMicro,micro_array,micro_array-method unionMicro,list,ANY-method
+#' @docType methods
+#' @section Methods: \describe{
+#' 
+#' \item{list("signature(M1 = \"micro_array\", M2 = \"micro_array\")")}{
+#' Returns a micro_array object which is the union of M1 and M2.  }
+#' 
+#' \item{list("signature(M1 = \"list\", M2 = \"ANY\")")}{ Returns a micro_array
+#' object which is the union of the elements of M1.  } }
+#' 
+#' @param M1 a micro-array or a list of micro-arrays
+#' @param M2 a micro-array or nothing if M1 is a list of micro-arrays
+#' @keywords methods
+#' @examples
+#' 
+#' data(M)
+#' #Create another microarray object with 100 genes
+#' Mbis<-M
+#' #Rename the 100 genes
+#' Mbis@name<-paste(M@name,"bis")
+#' rownames(Mbis@microarray) <- Mbis@name
+#' #Union (merge without duplicated names) of the two microarrays. 
+#' str(unionMicro(M,Mbis))
+#' 
+#' @exportMethod unionMicro
 setMethod(f="unionMicro", 
 	signature=c("micro_array","micro_array"),
 	definition=function(M1,M2){
-		
-		
-		
 		nom1<-rownames(M1@microarray)
 		nom2<-rownames(M2@microarray)
 		corres<-cbind(c(M1@name,M2@name),c(nom1,nom2))

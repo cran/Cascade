@@ -1,3 +1,7 @@
+# Cascade 2.0
+
+* Roxygen the package, add badges, logo, package help page and update pkgdown site.
+
 # Cascade 1.8
 
 * Fix discrepancy between datalist and datasets as requested by CRAN.

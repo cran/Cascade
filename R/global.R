@@ -1,17 +1,35 @@
-setGeneric("geneSelection",package="Cascade",def = function(x,y,tot.number,... ){standardGeneric("geneSelection")})
-setGeneric("genePeakSelection",package="Cascade",def = function(x,peak,... ){standardGeneric("genePeakSelection")})
-setGeneric("unionMicro",package="Cascade",def = function(M1,M2 ){standardGeneric("unionMicro")})
-setGeneric("position",package="Cascade",def = function(net,... ){standardGeneric("position")})
-setGeneric("geneNeighborhood",package="Cascade",def = function(net,targets,... ){standardGeneric("geneNeighborhood")})
-setGeneric("evolution",package="Cascade",def = function(net,list_nv,... ){standardGeneric("evolution")})
-setGeneric("inference",package="Cascade",def = function(M,... ){standardGeneric("inference")})
-setGeneric("cutoff",package="Cascade",def = function(Omega,... ){standardGeneric("cutoff")})
-setGeneric("analyze_network",package="Cascade",def = function(Omega,nv,...){standardGeneric("analyze_network")})
-#setGeneric("predict",def = function(object,...){standardGeneric("predict")})
-setGeneric("gene_expr_simulation",package="Cascade",def = function(network,...){standardGeneric("gene_expr_simulation")})
-setGeneric("compare",package="Cascade",def = function(Net,Net_inf,nv){standardGeneric("compare")})
-
-
+#' Coerce a matrix into a micro_array object.
+#' 
+#' Coerce a matrix into a micro_array object.
+#' 
+#' 
+#' @param M A matrix. Contains the microarray measurements. Should of size N *
+#' K, with N the number of genes and K=T*P with T the number of time points,
+#' and P the number of individuals. This matrix should be created using
+#' cbind(M1,M2,...) with M1 a N*T matrix with the measurements for individual
+#' 1, M2 a N*T matrix with the measurements for individual 2.
+#' @param time A vector. The time points measurements.
+#' @param subject The number of subjects.
+#' @return A micro_array object.
+#' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
+#' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
+#' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
+#' simulate the diffusion of a signal through a temporal gene network.
+#' \emph{Bioinformatics}, btt705.
+#' 
+#' Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F.,
+#' Meyer, N., ... & Bahram, S. (2013). Reverse-engineering the genetic
+#' circuitry of a cancer cell with predicted intervention in chronic
+#' lymphocytic leukemia. \emph{Proceedings of the National Academy of
+#' Sciences}, 110(2), 459-464.
+#' @examples
+#' 
+#'   if(require(CascadeData)){
+#' 	data(micro_US)
+#' 	micro_US<-as.micro_array(micro_US,time=c(60,90,210,390),subject=6)
+#' 	}
+#' 
+#' @export
 as.micro_array<-function(M,time,subject){
   
   if(is.null(row.names(M))){row.names(M)<-paste("gene",1:dim(M)[1])}
@@ -182,6 +200,51 @@ choice_cutoff_final<-function(O,nb,eps,hub,plot.g=FALSE,prop.hub){
 
 #simulations
 
+
+
+#' Generates a network.
+#' 
+#' Generates a network.
+#' 
+#' 
+#' @param nb Integer. The number of genes.
+#' @param time_label Vector. The time points measurements.
+#' @param exp The exponential parameter, as in the barabasi.game function in
+#' igraph package.
+#' @param init The attractiveness of the vertices with no adjacent edges. See
+#' barabasi.game function.
+#' @param regul A vector mapping each gene with its number of regulators.
+#' @param min_expr Minimum of strength of a non-zero link
+#' @param max_expr Maximum of strength of a non-zero link
+#' @param casc.level ...
+#' @return A network object.
+#' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.
+#' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
+#' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
+#' simulate the diffusion of a signal through a temporal gene network.
+#' \emph{Bioinformatics}, btt705.
+#' 
+#' Vallat, L., Kemper, C. A., Jung, N., Maumy-Bertrand, M., Bertrand, F.,
+#' Meyer, N., ... & Bahram, S. (2013). Reverse-engineering the genetic
+#' circuitry of a cancer cell with predicted intervention in chronic
+#' lymphocytic leukemia. \emph{Proceedings of the National Academy of
+#' Sciences}, 110(2), 459-464.
+#' @examples
+#' 
+#' set.seed(1)
+#' Net<-network_random(
+#' 	nb=100,
+#' 	time_label=rep(1:4,each=25),
+#' 	exp=1,
+#' 	init=1,
+#' 	regul=round(rexp(100,1))+1,
+#' 	min_expr=0.1,
+#' 	max_expr=2,
+#' 	casc.level=0.4
+#' 	)
+#' plot(Net)
+#' 
+#' @export
 network_random<-function(nb,time_label,exp,init,regul,min_expr,max_expr,casc.level){
   
   net<-matrix(0,nb,nb)
