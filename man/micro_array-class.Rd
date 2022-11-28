@@ -5,7 +5,7 @@
 \alias{micro_array-class}
 \title{Class \code{"micro_array"}}
 \description{
-The Class
+The \code{"micro_array"} class
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form

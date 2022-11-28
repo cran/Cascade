@@ -5,7 +5,7 @@
 \alias{network-class}
 \title{Class \code{"network"}}
 \description{
-Class \code{"network"}
+The \code{"network"} class
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form

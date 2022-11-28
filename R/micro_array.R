@@ -10,7 +10,7 @@
 #' 
 #' \item{list("signature(x = \"micro_array\")")}{ Gives an overview. } }
 #' 
-#' @param x an object of class `micro-array`
+#' @param x an object of class `micro_array`.
 #' @param ... additional parameters
 #' @keywords methods
 #' @examples
@@ -195,7 +195,7 @@ setMethod("dim","micro_array",function(x)
 #' @section Methods: \describe{
 #' 
 #' \item{list("signature(x = \"micro_array\", y = \"ANY\",...)")}{ \describe{
-#' \item{x}{a micro\_array object} \item{list_nv}{a vector of cutoff at which
+#' \item{x}{a micro_array object} \item{list_nv}{a vector of cutoff at which
 #' the network should be shown} } } \item{list("signature(x = \"network\", y =
 #' \"ANY\",...)")}{ \describe{ \item{x}{a network object}
 #' \item{list()}{Optionnal arguments: \describe{ \item{gr}{a vector giving the
@@ -215,7 +215,7 @@ setMethod("dim","micro_array",function(x)
 #' \item{x}{a micropredict object} \item{list()}{Optionnal arguments: see plot
 #' for network} }} }
 #' 
-#' @param x a micro\_array object, a network object or a micropredict object
+#' @param x a micro_array object, a network object or a micropredict object
 #' @param y optional and not used if x is an appropriate structure
 #' @param gr a vector giving the group of each gene 
 #' @param choice what graphic should be plotted: either "F"
@@ -353,7 +353,7 @@ else{
 #' @param lfc log fold change value used in limma's `topTable`. Defaults to 0.
 #' @param cont use contrasts. Defaults to `FALSE`. 
 #' @param f.asso function used to assess the association between the genes. 
-#' Tje default value `NULL` implies the use of the usual `mean` function. 
+#' The default value `NULL` implies the use of the usual `mean` function. 
 #' 
 #' @return A micro_array object.
 #' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.

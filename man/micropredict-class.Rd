@@ -5,7 +5,7 @@
 \alias{micropredict-class}
 \title{Class \code{"micropredict"}}
 \description{
-Class for prediction of microarray value.
+The \code{"micropredict"} class
 }
 \section{Objects from the Class}{
  Objects can be created by calls of the form

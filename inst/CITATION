@@ -29,9 +29,9 @@ citEntry(entry="Manual",
 	 publisher = "manual",
          year         = 2014,
          note         = note,
-         url          = "http://user2014.r-project.org/abstracts/posters/181_Jung.pdf",
+         url          = "https://user2014.r-project.org/abstracts/posters/181_Jung.pdf",
          textVersion = 
          paste("Jung, N., Bertrand, F., Bahram, S., Vallat, L., and Maumy-Bertrand, M. (",2014 ,"). ", 
-               titl, ", ", note, ", ", "http://user2014.r-project.org/abstracts/posters/181_Jung.pdf", ".", sep=""
+               titl, ", ", note, ", ", "https://user2014.r-project.org/abstracts/posters/181_Jung.pdf", ".", sep=""
                )
 )

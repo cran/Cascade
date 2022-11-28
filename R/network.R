@@ -68,10 +68,10 @@ setMethod("print","network",function(x,...){
 #' @param fix logical, should the position of the node in the network be calculated once at the beginning ? Defaults to TRUE.
 #' @param gif logical, TRUE
 #' @param taille vector giving the size of the plot. Default to c(2000,1000)
-#' @param label_v (optionnal) the name of the genes
-#' @param legend.position (optionnal) the position of the legend, defaults to "topleft"
-#' @param frame.color (optionnal) the color of the frame, defaults to "black"
-#' @param label.hub (optionnal) boolean, defaults to FALSE
+#' @param label_v (optional) the name of the genes
+#' @param legend.position (optional) the position of the legend, defaults to "topleft"
+#' @param frame.color (optional) the color of the frame, defaults to "black"
+#' @param label.hub (optional) boolean, defaults to FALSE
 #' 
 #' @return A HTML page with the evolution of the network.
 #' @author Nicolas Jung, Frédéric Bertrand , Myriam Maumy-Bertrand.

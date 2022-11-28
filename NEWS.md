@@ -1,3 +1,7 @@
+# Cascade 2.1
+
+* Fixes for Rd files and change of maintainer email.
+
 # Cascade 2.0
 
 * Roxygen the package, add badges, logo, package help page and update pkgdown site.
@@ -18,5 +22,5 @@
 # Cascade 1.5
 * Package and especially its code was transformed to cope with CRAN requirements
 
-# Cascade 1.0 - 1.5
+# Cascade 1.0 - 1.4
 * Creation and review of the package 

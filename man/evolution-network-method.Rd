@@ -35,13 +35,13 @@
 
 \item{taille}{vector giving the size of the plot. Default to c(2000,1000)}
 
-\item{label_v}{(optionnal) the name of the genes}
+\item{label_v}{(optional) the name of the genes}
 
-\item{legend.position}{(optionnal) the position of the legend, defaults to "topleft"}
+\item{legend.position}{(optional) the position of the legend, defaults to "topleft"}
 
-\item{frame.color}{(optionnal) the color of the frame, defaults to "black"}
+\item{frame.color}{(optional) the color of the frame, defaults to "black"}
 
-\item{label.hub}{(optionnal) boolean, defaults to FALSE}
+\item{label.hub}{(optional) boolean, defaults to FALSE}
 }
 \value{
 A HTML page with the evolution of the network.

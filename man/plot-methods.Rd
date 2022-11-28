@@ -43,7 +43,7 @@
 )
 }
 \arguments{
-\item{x}{a micro\_array object, a network object or a micropredict object}
+\item{x}{a micro_array object, a network object or a micropredict object}
 
 \item{y}{optional and not used if x is an appropriate structure}
 
@@ -93,7 +93,7 @@ output differs.
  \describe{
 
 \item{list("signature(x = \"micro_array\", y = \"ANY\",...)")}{ \describe{
-\item{x}{a micro\_array object} \item{list_nv}{a vector of cutoff at which
+\item{x}{a micro_array object} \item{list_nv}{a vector of cutoff at which
 the network should be shown} } } \item{list("signature(x = \"network\", y =
 \"ANY\",...)")}{ \describe{ \item{x}{a network object}
 \item{list()}{Optionnal arguments: \describe{ \item{gr}{a vector giving the

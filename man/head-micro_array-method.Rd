@@ -10,7 +10,7 @@
 \S4method{head}{micro_array}(x, ...)
 }
 \arguments{
-\item{x}{an object of class `micro-array`}
+\item{x}{an object of class `micro_array`.}
 
 \item{...}{additional parameters}
 }

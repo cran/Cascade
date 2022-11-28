@@ -92,7 +92,7 @@ selected [optionnal for geneSelection].}
 \item{cont}{use contrasts. Defaults to `FALSE`.}
 
 \item{f.asso}{function used to assess the association between the genes. 
-Tje default value `NULL` implies the use of the usual `mean` function.}
+The default value `NULL` implies the use of the usual `mean` function.}
 
 \item{durPeak}{vector of size 2 (default to c(1,1)) ; the first elements gives the length of the peak at
 the left, the second at the right. [only for genePeakSelection]}

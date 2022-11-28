@@ -29,6 +29,7 @@
 #' @importFrom utils sessionInfo 
 #' @importFrom cluster agnes
 #' @importFrom animation ani.options saveHTML
+#' @importFrom abind abind
 #' @import grid
 #' @import igraph 
 #' @import lattice
@@ -57,7 +58,7 @@ setGeneric("compare",package="Cascade",def = function(Net,Net_inf,nv){standardGe
 
 #' Class \code{"micro_array"}
 #' 
-#' The Class
+#' The \code{"micro_array"} class
 #' 
 #' 
 #' @name micro_array-class
@@ -116,7 +117,7 @@ setClass(
 
 #' Class \code{"network"}
 #' 
-#' Class \code{"network"}
+#' The \code{"network"} class
 #' 
 #' 
 #' @name network-class
@@ -136,7 +137,7 @@ setClass(Class = "network",
 
 #' Class \code{"micropredict"}
 #' 
-#' Class for prediction of microarray value.
+#' The \code{"micropredict"} class
 #' 
 #' 
 #' @name micropredict-class

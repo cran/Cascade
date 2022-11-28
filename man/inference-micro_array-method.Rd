@@ -9,7 +9,9 @@
 \S4method{inference}{micro_array}(
   M,
   tour.max = 30,
-  g = function(x) {     1/x },
+  g = function(x) {
+     1/x
+ },
   conv = 0.001,
   cv.subjects = TRUE,
   nb.folds = NULL,
