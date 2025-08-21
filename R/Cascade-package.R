@@ -1,13 +1,8 @@
-#' @title The Cascade Package: Selection, Reverse-Engineering and Prediction in Cascade Networks
-#'
-#' @description A modeling tool allowing gene selection, reverse engineering, and prediction in cascade networks. Jung, N., Bertrand, F., Bahram, S., Vallat, L., and Maumy-Bertrand, M. (2014) <doi:10.1093/bioinformatics/btt705>.
-#'
-#' @docType package
-#' @name Cascade-package
-#' @aliases Cascade-package Cascade
+#' @keywords internal
+#' @aliases Cascade-package Cascade NULL
 #' @author This package has been written by Frédéric Bertrand, Myriam
 #' Maumy-Bertrand and Nicolas Jung with biological insights from Laurent
-#' Vallat. Maintainer: Frédéric Bertrand <frederic.bertrand@@math.unistra.fr>
+#' Vallat. Maintainer: Frédéric Bertrand <frederic.bertrand@@utt.fr>
 #' 
 #' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
 #' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and
@@ -19,8 +14,8 @@
 #' circuitry of a cancer cell with predicted intervention in chronic
 #' lymphocytic leukemia. \emph{Proceedings of the National Academy of
 #' Sciences}, 110(2), 459-464.
-#' @keywords package
-#' 
+"_PACKAGE"
+
 #' @importFrom VGAM rlaplace rpareto zeta 
 #' @importFrom grDevices col2rgb colorRamp dev.new grey rainbow rgb
 #' @importFrom graphics abline hist legend lines matplot par rect text

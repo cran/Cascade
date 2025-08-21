@@ -4,9 +4,11 @@
 \name{Cascade-package}
 \alias{Cascade-package}
 \alias{Cascade}
-\title{The Cascade Package: Selection, Reverse-Engineering and Prediction in Cascade Networks}
+\title{Cascade: Selection, Reverse-Engineering and Prediction in Cascade Networks}
 \description{
-A modeling tool allowing gene selection, reverse engineering, and prediction in cascade networks. Jung, N., Bertrand, F., Bahram, S., Vallat, L., and Maumy-Bertrand, M. (2014) <doi:10.1093/bioinformatics/btt705>.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+A modeling tool allowing gene selection, reverse engineering, and prediction in cascade networks. Jung, N., Bertrand, F., Bahram, S., Vallat, L., and Maumy-Bertrand, M. (2014) \doi{10.1093/bioinformatics/btt705}.
 }
 \references{
 Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
@@ -20,9 +22,18 @@ circuitry of a cancer cell with predicted intervention in chronic
 lymphocytic leukemia. \emph{Proceedings of the National Academy of
 Sciences}, 110(2), 459-464.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://fbertran.github.io/Cascade/}
+  \item \url{https://github.com/fbertran/Cascade/}
+  \item Report bugs at \url{https://github.com/fbertran/Cascade/issues/}
+}
+
+}
 \author{
 This package has been written by Frédéric Bertrand, Myriam
 Maumy-Bertrand and Nicolas Jung with biological insights from Laurent
-Vallat. Maintainer: Frédéric Bertrand <frederic.bertrand@math.unistra.fr>
+Vallat. Maintainer: Frédéric Bertrand <frederic.bertrand@utt.fr>
 }
-\keyword{package}
+\keyword{internal}

@@ -20,7 +20,7 @@ setMethod("plot"
     O[abs(O)>=nv]<-1
     if(is.null(label_v)){label_v<-1:dim(O)[1]}
 	
-	G<-graph.adjacency(O,weighted=TRUE)
+	G<-graph_from_adjacency_matrix(O,weighted=TRUE)
 	
 	couleur1<-colorRamp(c(grey(0.95),"blue"))
 	couleur2<-colorRamp(c(grey(0.95),"red"))

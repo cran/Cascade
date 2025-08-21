@@ -4,29 +4,28 @@ year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
 vers <- paste("R package version", meta$Version)
 note <- "book of abstracts, User2014!, Los Angeles, page 153"
 titl <- "Cascade: a R-package to study, predict and simulate the diffusion of a signal through a temporal gene network"
-auth <- personList(as.person("Nicolas Jung"),
-                             as.person("Frederic Bertrand"),
-                             as.person("Seiamak Bahram"),
-                             as.person("Laurent Vallat"),
-                             as.person("Myriam Maumy-Bertrand"))
+auth <- c(person(given = "Nicolas", family= "Jung"),
+                             person(given = "Frederic", family= "Bertrand"),
+                             person(given = "Seiamak", family= "Bahram"),
+                             person(given = "Laurent", family= "Vallat"),
+                             person(given = "Myriam", family= "Maumy-Bertrand"))
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
          title = titl,
          author = auth,
          year = 2014,
-         
 journal="Bioinformatics",
 volume="30",
 issue="4",
 url="https://doi.org/10.1093/bioinformatics/btt705",
 pages="571-573",
          textVersion =
-         paste0("Jung, N., Bertrand, F., Bahram, S., Vallat, L., and Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and simulate the diffusion of a signal through a temporal gene network. Bioinformatics, 30(4):571-573, btt705, https://doi.org/10.1093/bioinformatics/btt705."))
+         paste0("Jung, N., Bertrand, F., Bahram, S., Vallat, L., and Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and simulate the diffusion of a signal through a temporal gene network. Bioinformatics, 30(4):571-573, btt705, https://doi.org/10.1093/bioinformatics/btt705.")
+         )
          
-citEntry(entry="Manual",
+bibentry(bibtype="Manual",
          title = titl,
          author = auth,
-	 publisher = "manual",
          year         = 2014,
          note         = note,
          url          = "https://user2014.r-project.org/abstracts/posters/181_Jung.pdf",

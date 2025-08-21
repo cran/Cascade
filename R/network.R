@@ -34,9 +34,9 @@ setMethod("analyze_network","network",function(Omega,nv,label_v=NULL){
   O<-Omega@network
   Omega<-Omega@network
   O[abs(O)<=nv]<-0
-  G<-graph.adjacency(O,weighted=TRUE)
+  G<-graph_from_adjacency_matrix(O,weighted=TRUE)
   
-  get.edgelist(G)->Q	
+  as_edgelist(G)->Q	
   
   weight<-rep(0,dim(Q)[1])
   for(i in 1:dim(Q)[1]){weight[i]<-Omega[Q[i,1],Q[i,2]]}
@@ -218,15 +218,15 @@ setMethod("position","network",function(net,nv=0){
     O<-O[-enle,-enle]
   }
   
-  G<-graph.adjacency(O,weighted=TRUE)
-  get.edgelist(G)->Q	
+  G<-graph_from_adjacency_matrix(O,weighted=TRUE)
+  as_edgelist(G)->Q	
   
   Q[,1]<-nom[Q[,1]]
   Q[,2]<-nom[Q[,2]]
   
   # dev.new(width=150,heigth=300,xlim=c(min(L[,1]),max(L[,1])))
   #par(mar=c(0,0,0,0), oma=c(0,0,0,0),mai=c(0,0,0,0))
-  L<-layout.fruchterman.reingold(G,minx=rep(0,vcount(G)),maxx=rep(150,vcount(G)),miny=rep(0,vcount(G)),maxy=rep(300,vcount(G)))
+  L<-layout_with_fr(G,minx=rep(0,vcount(G)),maxx=rep(150,vcount(G)),miny=rep(0,vcount(G)),maxy=rep(300,vcount(G)))
   return(cbind(nom,L))
 }
 )
@@ -406,10 +406,10 @@ setMethod("plot"
               if(label.hub==TRUE){nom2[which(size<3)]<-NA}
               
               
-              G<-graph.adjacency(O,weighted=TRUE)
+              G<-graph_from_adjacency_matrix(O,weighted=TRUE)
               
               
-              get.edgelist(G)->Q	
+              as_edgelist(G)->Q	
               
               Q[,1]<-nom[Q[,1]]
               Q[,2]<-nom[Q[,2]]
@@ -714,7 +714,7 @@ setMethod("geneNeighborhood","network"
             Omega<-net@network
             O[abs(O)<=nv]<-0
             O[abs(O)>nv]<-1
-            G<-graph.adjacency(O,weighted=TRUE)
+            G<-graph_from_adjacency_matrix(O,weighted=TRUE)
             couleur<-colorRamp(c("red","blue"))
             color<-rep(grey(0.92),length(V(G)))
             if(is.null(label_v)){label_v<-1:dim(O)[1]}

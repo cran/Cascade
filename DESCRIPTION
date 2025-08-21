@@ -2,20 +2,22 @@ Package: Cascade
 Type: Package
 Title: Selection, Reverse-Engineering and Prediction in Cascade
         Networks
-Version: 2.1
-Date: 2022-11-28
+Version: 2.2
+Date: 2025-08-21
 Depends: R (>= 3.5.0)
 biocViews:
 Imports: abind, animation, cluster, grid, igraph, lars, lattice, limma,
         magic, methods, nnls, splines, stats4, survival, tnet, VGAM
-Suggests: R.rsp, CascadeData, knitr
+Suggests: R.rsp, CascadeData, knitr, testthat (>= 3.0.0)
 Authors@R: c(
 	person(given = "Frederic", family= "Bertrand", role = c("cre", "aut"), email = "frederic.bertrand@utt.fr", comment = c(ORCID = "0000-0002-0837-8281")),
 	person(given = "Myriam", family= "Maumy-Bertrand", role = c("aut"), email = "myriam.maumy-bertrand@utt.fr", comment = c(ORCID = "0000-0002-4615-1512")),
 	person(given = "Laurent", family= "Vallat", role = c("ctb"), email = "vallat@unistra.fr"),
 	person(given = "Nicolas", family= "Jung", role = c("ctb"), email = "nicolas.jung@unistra.fr"))
-Author: Frederic Bertrand [cre, aut] (<https://orcid.org/0000-0002-0837-8281>),
-  Myriam Maumy-Bertrand [aut] (<https://orcid.org/0000-0002-4615-1512>),
+Author: Frederic Bertrand [cre, aut] (ORCID:
+    <https://orcid.org/0000-0002-0837-8281>),
+  Myriam Maumy-Bertrand [aut] (ORCID:
+    <https://orcid.org/0000-0002-4615-1512>),
   Laurent Vallat [ctb],
   Nicolas Jung [ctb]
 Maintainer: Frederic Bertrand <frederic.bertrand@utt.fr>
@@ -26,11 +28,12 @@ Collate: Cascade-package.R global.R micro_array.R network.R
         micro_array-network.R micropredict.R datasets.R
 Classification/MSC: 62J05, 62J07, 62J99, 92C42
 VignetteBuilder: R.rsp
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 URL: https://fbertran.github.io/Cascade/,
         https://github.com/fbertran/Cascade/
 BugReports: https://github.com/fbertran/Cascade/issues/
+Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-11-28 09:54:41 UTC; fbertran
+Packaged: 2025-08-20 23:18:16 UTC; bertran7
 Repository: CRAN
-Date/Publication: 2022-11-28 12:30:06 UTC
+Date/Publication: 2025-08-21 02:40:02 UTC
