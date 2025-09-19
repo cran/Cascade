@@ -34,6 +34,6 @@ Useful links:
 \author{
 This package has been written by Frédéric Bertrand, Myriam
 Maumy-Bertrand and Nicolas Jung with biological insights from Laurent
-Vallat. Maintainer: Frédéric Bertrand <frederic.bertrand@utt.fr>
+Vallat. Maintainer: Frédéric Bertrand <frederic.bertrand@lecnam.net>
 }
 \keyword{internal}

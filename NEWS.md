@@ -1,3 +1,13 @@
+# Cascade 2.3
+
+* Maintainer email update.
+* Added package doi
+
+# Cascade 2.2
+
+* Added unit tests.
+* Fixed citation file.
+
 # Cascade 2.1
 
 * Fixes for Rd files and change of maintainer email.

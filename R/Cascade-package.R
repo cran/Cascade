@@ -2,7 +2,7 @@
 #' @aliases Cascade-package Cascade NULL
 #' @author This package has been written by Frédéric Bertrand, Myriam
 #' Maumy-Bertrand and Nicolas Jung with biological insights from Laurent
-#' Vallat. Maintainer: Frédéric Bertrand <frederic.bertrand@@utt.fr>
+#' Vallat. Maintainer: Frédéric Bertrand <frederic.bertrand@@lecnam.net>
 #' 
 #' @references Jung, N., Bertrand, F., Bahram, S., Vallat, L., and
 #' Maumy-Bertrand, M. (2014). Cascade: a R-package to study, predict and

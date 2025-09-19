@@ -9,6 +9,25 @@ auth <- c(person(given = "Nicolas", family= "Jung"),
                              person(given = "Seiamak", family= "Bahram"),
                              person(given = "Laurent", family= "Vallat"),
                              person(given = "Myriam", family= "Maumy-Bertrand"))
+doi <- paste0("10.32614/CRAN.package.", meta$Package)
+urldoi <- paste0("https://doi.org/", doi)
+
+bibentry(bibtype="Manual",
+         title = titl,
+         author = c(person(given = "Frederic", family= "Bertrand"),
+         person(given = "Myriam", family= "Maumy-Bertrand"),
+         person(given = "Laurent", family= "Vallat"),
+         person(given = "Nicolas", family= "Jung")),
+         year         = year,
+         note         = vers,
+         url          = "https://CRAN.R-project.org/package=Cascade",
+         doi         = doi,
+         textVersion = 
+         paste("Frédéric Bertrand and Myriam Maumy-Bertrand (",year ,"). ", 
+               titl, ", ", vers, ". doi:", doi, ".", sep=""
+               )
+)
+
 
 bibentry(bibtype = "Article",
          title = titl,
