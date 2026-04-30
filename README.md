@@ -7,10 +7,10 @@
 # Cascade, Selection, Reverse-Engineering and Prediction in Cascade Networks
 ## Frédéric Bertrand and Myriam Maumy-Bertrand
 
-<https://doi.org/10.32614/CRAN.package.bigalgebra>
+<https://doi.org/10.32614/CRAN.package.Cascade>
 
 <!-- badges: start -->
-[![DOI](https://img.shields.io/badge/doi-10.32614/CRAN.package.ModStatR-blue.svg)](https://doi.org/10.32614/CRAN.package.ModStatR)
+[![DOI](https://img.shields.io/badge/doi-10.32614/CRAN.package.Cascade-blue.svg)](https://doi.org/10.32614/CRAN.package.Cascade)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/fbertran/Cascade/workflows/R-CMD-check/badge.svg)](https://github.com/fbertran/Cascade/actions)
@@ -56,6 +56,7 @@ Import Cascade Data (repeated measurements on several subjects) from the Cascade
 ``` r
 library(Cascade)
 if(!require(CascadeData)){install.packages("CascadeData")}
+#> Loading required package: CascadeData
 data(micro_US)
 micro_US<-as.micro_array(micro_US,time=c(60,90,210,390),subject=6)
 ```
@@ -64,6 +65,7 @@ Get a summay and plots of the data:
 
 ``` r
 summary(micro_US)
+#> Loading required package: cluster
 #>    N1_US_T60        N1_US_T90        N1_US_T210       N1_US_T390       N2_US_T60     
 #>  Min.   :   1.0   Min.   :   1.0   Min.   :   1.0   Min.   :   1.0   Min.   :   1.0  
 #>  1st Qu.:  19.7   1st Qu.:  18.8   1st Qu.:  15.2   1st Qu.:  20.9   1st Qu.:  18.5  
@@ -110,7 +112,7 @@ summary(micro_US)
 </div>
 
 ### Gene selection
-There are several functions to carry out gene selection before the inference. They are detailed in the two vignettes of the package. 
+There are several functions to carry out gene selection before the inference. They are detailed in the package vignette and in the website-only E-MTAB-1475 re-analysis PDF.
 
 ### Data simulation
 Let's simulate some cascade data and then do some reverse engineering.
@@ -155,40 +157,50 @@ M <- Cascade::gene_expr_simulation(
   time_label=rep(1:4,each=25),
   subject=5,
   level_peak=200)
+#> Loading required package: VGAM
+#> Loading required package: stats4
+#> Loading required package: splines
 ```
 
 Get a summay and plots of the simulated data:
 
 ``` r
 summary(M)
-#>  log(S/US) : P1T1   log(S/US) : P1T2    log(S/US) : P1T3    log(S/US) : P1T4   log(S/US) : P2T1  
-#>  Min.   :-887.428   Min.   :-2060.695   Min.   :-837.5811   Min.   :-2189.33   Min.   :-431.905  
-#>  1st Qu.: -53.644   1st Qu.:  -70.993   1st Qu.: -85.2176   1st Qu.: -115.23   1st Qu.: -50.282  
-#>  Median :   6.122   Median :    2.206   Median :  -6.6303   Median :  -10.49   Median :  -3.782  
-#>  Mean   :   3.928   Mean   :   -3.800   Mean   :   0.5563   Mean   :  -75.60   Mean   :   8.264  
-#>  3rd Qu.:  74.894   3rd Qu.:   79.999   3rd Qu.:  71.9501   3rd Qu.:   43.85   3rd Qu.:  40.975  
-#>  Max.   : 747.779   Max.   : 1461.163   Max.   :1279.6850   Max.   :  492.80   Max.   :1287.819  
-#>  log(S/US) : P2T2   log(S/US) : P2T3   log(S/US) : P2T4  log(S/US) : P3T1   log(S/US) : P3T2  
-#>  Min.   :-845.072   Min.   :-557.840   Min.   :-660.17   Min.   :-868.834   Min.   :-953.894  
-#>  1st Qu.: -21.668   1st Qu.: -42.958   1st Qu.: -63.34   1st Qu.: -44.656   1st Qu.: -59.964  
-#>  Median :   2.059   Median :  -2.448   Median : -10.97   Median :   1.839   Median :  -1.306  
-#>  Mean   :  18.235   Mean   :  25.290   Mean   :  18.10   Mean   :  -2.150   Mean   :  24.123  
-#>  3rd Qu.:  40.323   3rd Qu.:  46.573   3rd Qu.:  42.56   3rd Qu.:  55.072   3rd Qu.:  78.430  
-#>  Max.   : 699.912   Max.   :1754.081   Max.   :1418.99   Max.   : 597.562   Max.   :1808.233  
-#>  log(S/US) : P3T3    log(S/US) : P3T4   log(S/US) : P4T1   log(S/US) : P4T2   log(S/US) : P4T3  
-#>  Min.   :-1182.316   Min.   :-1027.24   Min.   :-1012.76   Min.   :-1569.32   Min.   :-577.799  
-#>  1st Qu.:  -87.170   1st Qu.:  -61.31   1st Qu.:  -33.79   1st Qu.: -118.83   1st Qu.: -62.623  
-#>  Median :   -2.614   Median :   16.27   Median :   11.57   Median :  -13.84   Median :  -8.788  
-#>  Mean   :   10.224   Mean   :   27.52   Mean   :   10.98   Mean   :  -63.39   Mean   : -14.803  
-#>  3rd Qu.:   79.246   3rd Qu.:   60.93   3rd Qu.:   74.09   3rd Qu.:   40.22   3rd Qu.:  37.779  
-#>  Max.   : 2761.291   Max.   : 1926.45   Max.   :  891.60   Max.   :  678.27   Max.   : 430.737  
-#>  log(S/US) : P4T4   log(S/US) : P5T1   log(S/US) : P5T2    log(S/US) : P5T3  log(S/US) : P5T4  
-#>  Min.   :-661.083   Min.   :-555.708   Min.   :-1467.268   Min.   :-911.18   Min.   :-621.705  
-#>  1st Qu.: -41.705   1st Qu.: -64.469   1st Qu.:  -68.769   1st Qu.: -71.66   1st Qu.: -62.466  
-#>  Median :  -1.468   Median :   2.697   Median :   -1.565   Median :   1.54   Median :  -5.789  
-#>  Mean   :  10.111   Mean   :   9.403   Mean   :    8.180   Mean   :  13.03   Mean   :   7.083  
-#>  3rd Qu.:  67.888   3rd Qu.:  57.251   3rd Qu.:   62.256   3rd Qu.:  86.29   3rd Qu.:  62.041  
-#>  Max.   : 492.723   Max.   : 654.771   Max.   :  990.550   Max.   :1386.11   Max.   : 689.323
+#>  log(S/US) : P1T1   log(S/US) : P1T2    log(S/US) : P1T3    log(S/US) : P1T4  
+#>  Min.   :-887.428   Min.   :-2060.695   Min.   :-837.5811   Min.   :-2189.33  
+#>  1st Qu.: -53.644   1st Qu.:  -70.993   1st Qu.: -85.2176   1st Qu.: -115.23  
+#>  Median :   6.122   Median :    2.206   Median :  -6.6303   Median :  -10.49  
+#>  Mean   :   3.928   Mean   :   -3.800   Mean   :   0.5563   Mean   :  -75.60  
+#>  3rd Qu.:  74.894   3rd Qu.:   79.999   3rd Qu.:  71.9501   3rd Qu.:   43.85  
+#>  Max.   : 747.779   Max.   : 1461.163   Max.   :1279.6850   Max.   :  492.80  
+#>  log(S/US) : P2T1   log(S/US) : P2T2   log(S/US) : P2T3   log(S/US) : P2T4  log(S/US) : P3T1  
+#>  Min.   :-431.905   Min.   :-845.072   Min.   :-557.840   Min.   :-660.17   Min.   :-868.834  
+#>  1st Qu.: -50.282   1st Qu.: -21.668   1st Qu.: -42.958   1st Qu.: -63.34   1st Qu.: -44.656  
+#>  Median :  -3.782   Median :   2.059   Median :  -2.448   Median : -10.97   Median :   1.839  
+#>  Mean   :   8.264   Mean   :  18.235   Mean   :  25.290   Mean   :  18.10   Mean   :  -2.150  
+#>  3rd Qu.:  40.975   3rd Qu.:  40.323   3rd Qu.:  46.573   3rd Qu.:  42.56   3rd Qu.:  55.072  
+#>  Max.   :1287.819   Max.   : 699.912   Max.   :1754.081   Max.   :1418.99   Max.   : 597.562  
+#>  log(S/US) : P3T2   log(S/US) : P3T3    log(S/US) : P3T4   log(S/US) : P4T1  
+#>  Min.   :-953.894   Min.   :-1182.316   Min.   :-1027.24   Min.   :-1012.76  
+#>  1st Qu.: -59.964   1st Qu.:  -87.170   1st Qu.:  -61.31   1st Qu.:  -33.79  
+#>  Median :  -1.306   Median :   -2.614   Median :   16.27   Median :   11.57  
+#>  Mean   :  24.123   Mean   :   10.224   Mean   :   27.52   Mean   :   10.98  
+#>  3rd Qu.:  78.430   3rd Qu.:   79.246   3rd Qu.:   60.93   3rd Qu.:   74.09  
+#>  Max.   :1808.233   Max.   : 2761.291   Max.   : 1926.45   Max.   :  891.60  
+#>  log(S/US) : P4T2   log(S/US) : P4T3   log(S/US) : P4T4   log(S/US) : P5T1  
+#>  Min.   :-1569.32   Min.   :-577.799   Min.   :-661.083   Min.   :-555.708  
+#>  1st Qu.: -118.83   1st Qu.: -62.623   1st Qu.: -41.705   1st Qu.: -64.469  
+#>  Median :  -13.84   Median :  -8.788   Median :  -1.468   Median :   2.697  
+#>  Mean   :  -63.39   Mean   : -14.803   Mean   :  10.111   Mean   :   9.403  
+#>  3rd Qu.:   40.22   3rd Qu.:  37.779   3rd Qu.:  67.888   3rd Qu.:  57.251  
+#>  Max.   :  678.27   Max.   : 430.737   Max.   : 492.723   Max.   : 654.771  
+#>  log(S/US) : P5T2    log(S/US) : P5T3  log(S/US) : P5T4  
+#>  Min.   :-1467.268   Min.   :-911.18   Min.   :-621.705  
+#>  1st Qu.:  -68.769   1st Qu.: -71.66   1st Qu.: -62.466  
+#>  Median :   -1.565   Median :   1.54   Median :  -5.789  
+#>  Mean   :    8.180   Mean   :  13.03   Mean   :   7.083  
+#>  3rd Qu.:   62.256   3rd Qu.:  86.29   3rd Qu.:  62.041  
+#>  Max.   :  990.550   Max.   :1386.11   Max.   : 689.323
 ```
 
 <div class="figure">
@@ -235,6 +247,7 @@ We infer the new network using subjectwise leave one out cross-validation (all m
 
 ``` r
 Net_inf_C <- Cascade::inference(M, cv.subjects=TRUE)
+#> Loading required package: nnls
 #> We are at step :  1
 #> The convergence of the network is (L1 norm) : 0.0072
 #> We are at step :  2
@@ -383,5 +396,4 @@ analyze_network(network,nv=0.14)
 #> 73   73           0      0 0.0000000  0.0000000
 #> 74   74           0      0 0.0000000  0.0000000
 ```
-
 

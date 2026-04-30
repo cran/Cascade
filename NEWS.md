@@ -1,3 +1,11 @@
+# Cascade 2.4
+
+* Fixed CRAN package load warning by removing the unused `magic` import.
+* Replaced broad `igraph` imports with selective namespace imports to reduce collision risk.
+* Replaced the remaining broad imports with selective imports or removed them when unused.
+* Removed the legacy `inst/animation` saveHTML output that vendored vulnerable jQuery assets.
+* Moved the E-MTAB-1475 re-analysis PDF out of the package vignettes and made it available through the pkgdown website only.
+
 # Cascade 2.3
 
 * Maintainer email update.

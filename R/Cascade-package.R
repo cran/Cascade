@@ -21,20 +21,16 @@
 #' @importFrom graphics abline hist legend lines matplot par rect text
 #' @importFrom methods new
 #' @importFrom stats aggregate cor lm loess model.matrix quantile rbinom reshape rmultinom rnorm runif var wilcox.test
-#' @importFrom utils sessionInfo 
 #' @importFrom cluster agnes
 #' @importFrom animation ani.options saveHTML
 #' @importFrom abind abind
-#' @import grid
-#' @import igraph 
-#' @import lattice
-#' @import limma
-#' @import magic
+#' @importFrom igraph as_edgelist graph_from_adjacency_matrix layout_with_fr
+#' @importFrom igraph neighborhood vcount V
+#' @importFrom limma contrasts.fit eBayes lmFit makeContrasts topTable
 #' @import nnls
 #' @import splines 
 #' @import stats4
-#' @import survival
-#' @import tnet
+#' @importFrom tnet as.tnet betweenness_w closeness_w degree_w
 #' 
 NULL
 
@@ -153,4 +149,3 @@ setClass(Class = "micropredict",
                         ,network="network"
                         ,targets="numeric")
 )
-

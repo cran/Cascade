@@ -454,16 +454,14 @@ setMethod(f="geneSelection", signature=c("micro_array","micro_array","numeric"),
 	                    Design=NULL,
 	                    lfc=0){
    
-	  if(!is.null(sessionInfo()$otherPkgs$limma$Version)){
-	  BBB<-strsplit(sessionInfo()$otherPkgs$limma$Version,"[.]")
-	  } else {
-	    if(!is.null(sessionInfo()$loadedOnly$limma$Version)){
-	  BBB<-strsplit(sessionInfo()$loadedOnly$limma$Version,"[.]")
-	    } else {stop("Please install the limma BioConductor package")}
+	  limma_version <- tryCatch(utils::packageVersion("limma"),
+	                           error = function(e) NULL)
+	  if(is.null(limma_version)){
+	    stop("Please install the limma BioConductor package")
 	  }
-	  if( !(BBB[[1]][1]>3 || (BBB[[1]][1]==3 && BBB[[1]][2]>18) || 
-	          (BBB[[1]][1]==3 && BBB[[1]][2]==18 && BBB[[1]][3]>=13 ) ))
-	  {stop("Upgrade your version of Limma (>= 3.18.13)")}
+	  if(limma_version < "3.18.13"){
+	    stop("Upgrade your version of Limma (>= 3.18.13)")
+	  }
     
     
     indic<-0
@@ -473,8 +471,6 @@ setMethod(f="geneSelection", signature=c("micro_array","micro_array","numeric"),
   indic<-1
   M2<-M1
   }
-
-		require(limma)		
 
 		if(data_log==TRUE){
 			M1_mic<-log(M1@microarray)
@@ -692,24 +688,21 @@ setMethod(f="geneSelection",
 	                    f.asso=NULL){
   
   
-	  if(!is.null(sessionInfo()$otherPkgs$limma$Version)){
-	    BBB<-strsplit(sessionInfo()$otherPkgs$limma$Version,"[.]")
-	  } else {
-	    if(!is.null(sessionInfo()$loadedOnly$limma$Version)){
-	      BBB<-strsplit(sessionInfo()$loadedOnly$limma$Version,"[.]")
-	    } else {stop("Please install the limma BioConductor package")}
+	  limma_version <- tryCatch(utils::packageVersion("limma"),
+	                           error = function(e) NULL)
+	  if(is.null(limma_version)){
+	    stop("Please install the limma BioConductor package")
 	  }
 	  
-	  if( !(BBB[[1]][1]>3 || (BBB[[1]][1]==3 && BBB[[1]][2]>18) || 
-	          (BBB[[1]][1]==3 && BBB[[1]][2]==18 && BBB[[1]][3]>=13 ) ))
-	  {stop("Upgrade your version of Limma (>= 3.18.13)")}
+	  if(limma_version < "3.18.13"){
+	    stop("Upgrade your version of Limma (>= 3.18.13)")
+	  }
 
   
   M<-x
   contrast<-y
  
   M_mic<-M
-		require(limma)		
 n<-length(M)
 Time<-length(M[[2]]@time)
 

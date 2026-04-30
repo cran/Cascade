@@ -26,8 +26,8 @@ Sciences}, 110(2), 459-464.
 Useful links:
 \itemize{
   \item \url{https://fbertran.github.io/Cascade/}
-  \item \url{https://github.com/fbertran/Cascade/}
-  \item Report bugs at \url{https://github.com/fbertran/Cascade/issues/}
+  \item \url{https://github.com/fbertran/Cascade}
+  \item Report bugs at \url{https://github.com/fbertran/Cascade/issues}
 }
 
 }

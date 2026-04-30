@@ -48,8 +48,6 @@ setMethod("predict"
                     ,targets=NULL
                     ,adapt=TRUE
           ){
-            require(magic)
-            
             micro<-object
             if(!is.null(targets)){
               micro@microarray[targets,]<-0

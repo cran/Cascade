@@ -29,7 +29,6 @@
 #' 
 #' @exportMethod analyze_network
 setMethod("analyze_network","network",function(Omega,nv,label_v=NULL){
-  require(tnet)
   if(is.null(label_v)){label_v<-1:dim(Omega@network)[1]}
   O<-Omega@network
   Omega<-Omega@network
@@ -91,8 +90,7 @@ setMethod("print","network",function(x,...){
 #' \donttest{
 #' 	data(network)
 #' 	sequence<-seq(0,0.2,length.out=20)
-#' 	#setwd("inst/animation")
-#' 	#evolution(network,sequence)
+#' 	#evolution(network, sequence) # writes a saveHTML() viewer to getwd()
 #' }
 #' 
 #' @exportMethod evolution
@@ -205,7 +203,6 @@ setMethod("evolution","network",function(net
 #' 
 #' @exportMethod position
 setMethod("position","network",function(net,nv=0){
-  require(igraph)
   O<-net@network
   Omega<-net@network
   O[abs(O)<=nv]<-0
@@ -371,7 +368,6 @@ setMethod("plot"
               O[abs(O)<=nv]<-0
               O[abs(O)>nv]<-1
               
-              require(igraph)
               if(is.null(gr)){gr<-rep(1,dim(O)[1])}
               if(is.null(color.vertex)){
                 color.vertex<-rainbow(length(unique(gr)))
@@ -709,7 +705,6 @@ setMethod("geneNeighborhood","network"
                     ,graph=TRUE
                     ,names=FALSE
           ){
-            require(igraph)
             O<-net@network
             Omega<-net@network
             O[abs(O)<=nv]<-0
